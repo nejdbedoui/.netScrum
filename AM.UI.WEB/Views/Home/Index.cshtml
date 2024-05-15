@@ -1,0 +1,60 @@
+﻿@model IEnumerable<AM.ApplicationCore.Domain.Tache>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Etat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateDebut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateFin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Membre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sprint)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Etat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateDebut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateFin)
+            </td>
+            <td>
+                    @Html.ActionLink(item.Membre.Nom + " " + item.Membre.Prenom, "DetailsMembre", new { id = item.Membre.Matricule }) |
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sprint.Description)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new { SprintKey = item.SprintKey, MembreKey = item.MembreKey, Titre = item.Titre }) |
+                    @Html.ActionLink("Details", "Details", new { SprintKey = item.SprintKey, MembreKey = item.MembreKey, Titre = item.Titre }) |
+                         @Html.ActionLink("Delete", "Delete", new { SprintKey = item.SprintKey, MembreKey = item.MembreKey, Titre = item.Titre })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
